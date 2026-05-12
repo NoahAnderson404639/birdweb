@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Noah Anderson">
+    <title>Bird webpage</title>
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+    
+    <mainNav>
+        <ul>
+            <a href="Index.html">Home</a>
+            <a>Contact</a>
+        </ul>
+    </mainNav>
+
+<filterlist>
+
+<h2>Filters</h2>
+<div class = search>
+<input type="text" id="search" placeholder="Search..." />
+</div>
+<div class = "filters">
+<button data-filter="all">Clear</button>
+</div>
+
+<filterType class="filters">
+  <h4>Type</h3>
+  <button data-filter="Creepers">Creepers</button>
+  <button data-filter="Birds of Pray">Birds of Pray</button>
+  </filterType>
+
+<filterVacations class = "filters">
+    <h4>Vacations</h3>
+  <button data-filter="Hawaii">Hawaii</button>
+  <button data-filter="Black Hills">Black Hills</button>
+</filterVacations>
+
+</filterlist>
+<birdlist>
+<ul id="birdlist">
+  <li data-kind = "Creepers" data-vacation = "Hawaii" style = "background-color:rgb(238, 1, 1)">
+    <table>
+    <tr>
+      <td> <img src = "img/i'iwi.jpg" alt = "i'iwi bird" height="250" width="250"></td>
+      <td>I'iwi</td>
+      <td>1/1/1</td>
+      <td>Hawaii</td>
+    </tr>
+  </table>
+  </li>
+
+  <li data-kind = "Birds of Pray" data-vacation = "Hawaii" style = "background-color: #993300 ">
+    <table>
+      <tr>
+        <td> <img src = "img/i'iwi.jpg" alt = "i'iwi bird" height="250" width="250"></td>
+        <td>Hawaiian Hawk</td>
+        <td>1/1/1</td>
+        <td>Hawaii</td>
+      </tr>
+    </table>
+  </li>
+  
+</ul>
+</birdlist>
+
+<script>
+  const search = document.getElementById("search");
+  const items = document.querySelectorAll("#birdlist li");
+
+  search.addEventListener("input", () => {
+    const value = search.value.toLowerCase();
+
+    items.forEach(item => {
+      item.style.display = item.textContent.toLowerCase().includes(value)
+        ? "block"
+        : "none";
+    });
+  });
+
+  const buttons = document.querySelectorAll(".filters button");
+
+  buttons.forEach(btn => {
+    btn.addEventListener("click", () => {
+      const filter = btn.dataset.filter;
+      items.forEach(item => {
+        if (item.style.display != "none" || filter === "all"){
+        item.style.display =
+          filter === "all" || item.dataset.kind === filter || item.dataset.vacation === filter
+            ? "block"
+            : "none";
+        }
+        
+    });
+    });
+  });
+</script>
+
+
+</body>
+</html>
